@@ -1,19 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post list</title>
-</head>
-<body>
-    <h1>Post List</h1>
-    {% for post in posts %}
-        <div>{{ post.title }}</div>
-        <div>{{ post.content|truncatewords:10 }}</div>
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
 
-
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+        <h4 class="post-title">{{ post.title }}</h4>
+        <p class="content">{{ post.content|linebreaksbr|truncatewords:20 }}
+            <!--더보기 링크-->
+            <a href="{% url 'post_detail' pk=post.pk %}">더보기</a>
+        </p>
+        <p class="right-text">{{ post.published_date }} | <strong>Published</strong></p>
+        <p class="right-text">{{ post.author.username }} | <strong>Author</strong></p>
+    </div>
+{% endfor %}
+{% endblock %}
