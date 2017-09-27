@@ -9,12 +9,15 @@
 	<!--정적파일을 참조하는 템플릿 static태그 (STATICFILES_DIRS의 path를 기준으로 상대경로)-->
 	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
 	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-	<title>이한영 블로그</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<title>Django Blog</title>
 </head>
 <body>
 	<div class="blog-header">
 		<div class="container">
-			<h2 class="blog-title"><a href="">lhy's blog</a></h2>
+			<h2 class="blog-title"><a href="">Djangoblog</a></h2>
+			<h2><a href="{% url 'post_add' %}">글쓰기</a></h2>
 		</div>
 	</div>
 	<div class="container">
@@ -25,6 +28,8 @@
          {% endblock %}
 		</div>
 	</div>
+
+
 
 </body>
 </html>

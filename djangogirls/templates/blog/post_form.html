@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+<!--제목-->
+<!--내용-->
+<!--글쓰기 버튼-->
+{% block content %}
+<div>
+    <h2>글 작성</h2>
+    <form action="{% url 'post_add' %}" method="post">
+        {% csrf_token %}
+        <div class="checkbox">
+            <label>
+                <input name="is_published" type="checkbox">Publish
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="input-title">제목</label>
+            <input name="title" id="input-title" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="input-content">내용</label>
+            <textarea name="content" id="input-content" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <button class="btn btn-primary btn-block">작성하기</button>
+    </form>
+
+    {% if needs_content %}
+    <!-- Button trigger modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="">&times</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">입력 오류</h4>
+                </div>
+                <div class="modal-body">
+                    제목과 내용은 필수로 입력하세요!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#myModal').modal('show')
+    </script>
+    {% endif %}
+</div>
+{% endblock %}
