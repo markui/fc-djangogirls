@@ -14,12 +14,11 @@
         </div>
         <div class="form-group">
             <label for="input-title">제목</label>
-            <input name="title" id="input-title" type="text" class="form-control"
-                   {% if needs_content %}value={{ title }}{% endif %}>
+            <input name="title" id="input-title" type="text" class="form-control" value="{{ title }}">
         </div>
         <div class="form-group">
             <label for="input-content">내용</label>
-            <textarea name="content" id="input-content" cols="30" rows="10" class="form-control">{% if needs_content %}{{ content }}{% endif %}</textarea>
+            <textarea name="content" id="input-content" cols="30" rows="10" class="form-control">{{ content }}</textarea>
         </div>
         <button class="btn btn-primary btn-block">작성하기</button>
     </form>

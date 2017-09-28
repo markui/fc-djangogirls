@@ -95,5 +95,12 @@ def post_delete(request, pk):
     :param pk:
     :return:
     """
-    Post.objects.get(pk=pk).delete()
-    return redirect('post_list')
+    if request.method == 'POST':
+        Post.objects.get(pk=pk).delete()
+        return redirect('post_list')
+    return HttpResponse('Permission denied', status=403) # 개발자 도구에 나옴 => response가 403인거를 -> 이거를 프론트엔드 단에서 받아서 활용 가능함
+
+
+
+def quilljs(request):
+    return render(request, 'blog/quilljs.html')

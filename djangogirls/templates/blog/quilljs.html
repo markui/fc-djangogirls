@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.2/quill.snow.css" rel="stylesheet">
+
+    <!-- Create the editor container -->
+    <div id="editor">
+      <p>Hello World!</p>
+      <p>Some initial <strong>bold</strong> text</p>
+      <p><br></p>
+    </div>
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.2/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <!--<script>-->
+      <!--var quill = new Quill('#editor', {-->
+        <!--theme: 'snow'-->
+      <!--});-->
+    <!--</script>-->
+
+    <style>
+        #editor-container {
+          height: 375px;
+        }
+    </style>
+    <div id="editor-container">
+    </div>
+    <script>
+        var quill = new Quill('#editor-container', {
+          modules: {
+            toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block']
+            ]
+          },
+          placeholder: 'Compose an epic...',
+          theme: 'snow'  // or 'bubble'
+        });
+    </script>
+
+{% endblock %}
