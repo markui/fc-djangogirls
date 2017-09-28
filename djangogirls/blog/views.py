@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from .models import Post
@@ -67,12 +67,16 @@ def post_add(request):
             else:
                 post.save()
             return HttpResponseRedirect(reverse('post_detail', kwargs={'pk': post.pk}))
+            # 아니면, redirect('post_detail', pk=post.pk)
+
         # 한 값이라도 빠졌을 때,
         else:
             # title이나 content값이 오지 않았을 경우에는 객체를 생성하지 않고 다시 작성페이지로 이동
             # extra) 작성페이지로 이동시 '값을 입력해주세요'라는 텍스트를 어딘가에 표시(render) - 팝업창 모듈로 띄우는 것도 해볼 수 있음
             # extra****) modal
             context = {
+                'title': request.POST.get('title'),
+                'content': request.POST.get('content'),
                 'needs_content': True
             }
             return render(request, 'blog/post_form.html', context)
@@ -85,10 +89,11 @@ def post_delete(request, pk):
     """
     extra) Post delete 기능 구현
     # def post_delete(request, pk):
-    #  (POST요청에서만 동작해야함
+    #  (POST요청에서만 동작해야함)
     # -> pk에 해당하는 Post를 삭제하고 post_list페이지로 이동
     :param request:
     :param pk:
     :return:
     """
-    pass
+    Post.objects.get(pk=pk).delete()
+    return redirect('post_list')
